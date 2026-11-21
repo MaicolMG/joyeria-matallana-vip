@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 140" role="img" aria-labelledby="title description">
+  <title id="title">Joyería Matallana VIP</title>
+  <desc id="description">Esmeralda en forma de gota con árbol de raíces y destellos, junto al nombre Joyería Matallana VIP</desc>
+  <defs>
+    <linearGradient id="gem" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#C9F4D6"/>
+      <stop offset=".34" stop-color="#38B878"/>
+      <stop offset=".7" stop-color="#08764B"/>
+      <stop offset="1" stop-color="#063D31"/>
+    </linearGradient>
+    <linearGradient id="facet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E3F8E8" stop-opacity=".92"/>
+      <stop offset="1" stop-color="#46C985" stop-opacity=".08"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F7E5A7"/>
+      <stop offset=".52" stop-color="#C89A37"/>
+      <stop offset="1" stop-color="#8B641D"/>
+    </linearGradient>
+    <linearGradient id="wordmark" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8C6820"/>
+      <stop offset=".4" stop-color="#C19A42"/>
+      <stop offset=".52" stop-color="#F0DB9D"/>
+      <stop offset=".66" stop-color="#B58A31"/>
+      <stop offset="1" stop-color="#8C6820"/>
+      <animate attributeName="x1" values="-1;1;-1" dur="7s" repeatCount="indefinite"/>
+      <animate attributeName="x2" values="0;2;0" dur="7s" repeatCount="indefinite"/>
+    </linearGradient>
+    <linearGradient id="glint" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#FFFFFF" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="drop-clip">
+      <path d="M78 8C61 30 27 57 27 83a51 51 0 0 0 102 0C129 57 95 30 78 8Z"/>
+    </clipPath>
+    <filter id="soft-glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .gem-rotor {
+        transform-box:fill-box;
+        transform-origin:center;
+        animation:gem-rotation 12s cubic-bezier(.55,.05,.45,.95) infinite;
+      }
+      .brand:hover .gem-rotor { filter:url(#soft-glow); }
+      .shine { animation:gem-glint 3.4s ease-in-out infinite; }
+      .leaf { transform-box:fill-box; transform-origin:bottom center; animation:leaf-sway 3s ease-in-out infinite; }
+      .leaf.delay { animation-delay:1.1s; }
+      .spark { transform-box:fill-box; transform-origin:center; animation:sparkle 2.2s ease-in-out infinite; }
+      .spark.delay { animation-delay:1s; }
+      @keyframes gem-rotation {
+        0% { transform:rotate(0deg) translateY(0); }
+        50% { transform:rotate(180deg) translateY(-2px); }
+        100% { transform:rotate(360deg) translateY(0); }
+      }
+      @keyframes gem-glint {
+        0%, 10% { transform:translateX(-150px) rotate(22deg); opacity:0; }
+        32% { opacity:1; }
+        62%, 100% { transform:translateX(160px) rotate(22deg); opacity:0; }
+      }
+      @keyframes leaf-sway {
+        0%, 100% { transform:rotate(-4deg); }
+        50% { transform:rotate(5deg); }
+      }
+      @keyframes sparkle {
+        0%, 100% { opacity:.28; transform:scale(.7) rotate(0deg); }
+        50% { opacity:1; transform:scale(1.25) rotate(45deg); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .gem-rotor, .shine, .leaf, .spark { animation:none; }
+      }
+    </style>
+  </defs>
+  <g class="brand">
+    <g class="gem-rotor">
+      <path d="M78 8C61 30 27 57 27 83a51 51 0 0 0 102 0C129 57 95 30 78 8Z" fill="url(#gem)" stroke="url(#gold)" stroke-width="2.4"/>
+      <g clip-path="url(#drop-clip)" stroke="#D8F4DE" stroke-opacity=".62" stroke-width="1">
+        <path d="M78 8 44 57l34 14 34-14L78 8Z" fill="#A4ECC0" fill-opacity=".4"/>
+        <path d="m44 57-17 26 40 8 11-20-34-14Z" fill="#0F8A59"/>
+        <path d="m112 57 17 26-40 8-11-20 34-14Z" fill="#48C886" fill-opacity=".58"/>
+        <path d="M27 83 53 119l14-28-40-8Z" fill="#075B43"/>
+        <path d="m129 83-26 36-14-28 40-8Z" fill="#0A684A"/>
+        <path d="m53 119 25 15 25-15-14-28H67l-14 28Z" fill="#0A4738"/>
+        <path d="m78 8-11 83h22L78 8Z" fill="url(#facet)" stroke="none"/>
+        <path d="m27 83 51 51 51-51M44 57h68M53 119l25-48 25 48" fill="none"/>
+      </g>
+      <path d="M78 8C61 30 27 57 27 83a51 51 0 0 0 102 0C129 57 95 30 78 8Z" fill="none" stroke="#E8F7DD" stroke-opacity=".8" stroke-width="1"/>
+      <g fill="none" stroke="#392E24" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M78 111V66m0 22C69 73 59 70 52 62m26 40c8-13 18-20 27-25m-27 4C70 73 68 61 70 48m8 23c11-10 14-22 12-33" stroke-width="4.3"/>
+        <path d="M78 109c-8 7-14 8-23 8 5 5 13 6 22 3m1-4c8 7 15 8 24 6-5 5-13 6-22 4" stroke-width="3.2"/>
+      </g>
+      <g fill="#D9C579">
+        <path class="leaf" d="M52 62c-12 0-17-7-17-15 10 1 17 6 17 15Z"/>
+        <path class="leaf delay" d="M53 53c-9-7-8-15-3-21 7 7 9 14 3 21Z"/>
+        <path class="leaf delay" d="M104 77c11-2 17-8 17-16-10 2-17 7-17 16Z"/>
+        <path class="leaf" d="M107 67c9-7 9-14 4-21-7 7-10 14-4 21Z"/>
+      </g>
+      <g fill="#72D69A">
+        <path class="leaf delay" d="M70 48c-9-7-9-15-3-21 7 7 10 14 3 21Z"/>
+        <path class="leaf" d="M90 38c10-4 13-12 9-19-9 5-13 11-9 19Z"/>
+      </g>
+      <rect class="shine" x="-42" y="0" width="32" height="140" fill="url(#glint)" clip-path="url(#drop-clip)"/>
+    </g>
+    <path class="spark" d="M146 22v14m-7-7h14" fill="none" stroke="url(#gold)" stroke-width="1.5"/>
+    <path class="spark delay" d="M148 104v10m-5-5h10" fill="none" stroke="url(#gold)" stroke-width="1.2"/>
+    <text x="169" y="43" fill="#0B6B45" font-family="Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="6">JOYERÍA</text>
+    <text x="166" y="80" fill="url(#wordmark)" font-family="Georgia, 'Times New Roman', serif" font-size="31" letter-spacing="2.6">MATALLANA VIP</text>
+    <path d="M168 92h390" stroke="url(#gold)" stroke-opacity=".7" stroke-width="1"/>
+    <text x="170" y="111" fill="#786A4A" font-family="Arial, sans-serif" font-size="8.5" letter-spacing="3.5">ESMERALDAS COLOMBIANAS · ALTA JOYERÍA</text>
+  </g>
+</svg>

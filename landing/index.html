@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joyería Matallana VIP — Bogotá, Colombia</title>
+  <meta name="description" content="Joyería de alta gama en Colombia. Esmeraldas de Boyacá, Oro 18K, Piezas a Medida. Bogotá.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ═══════════════════════════════════════════════════════════
+       VARIABLES — PERSONALIZA AQUÍ (10% editable)
+    ═══════════════════════════════════════════════════════════ */
+    :root {
+      /* Colores principales */
+      --gold:          #D4AF37;
+      --gold-light:    #F0D060;
+      --gold-dark:     #9A7B1C;
+      --bg:            #080808;
+      --bg-2:          #0e0d07;
+      --bg-card:       #111111;
+      --text:          #F5F0E8;
+      --text-muted:    #9A9080;
+      --border:        #1e1e1e;
+
+      /* Contenido personalizable */
+      --nombre-marca:  "MATALLANA";
+      --slogan:        "Joyería VIP · Bogotá, Colombia";
+      --hero-linea1:   "Joyería";
+      --hero-linea2:   "Atemporal";
+      --hero-linea3:   "& Exclusiva";
+      --hero-sub:      "Esmeraldas de Boyacá · Oro 18K · Piezas a Medida";
+      --tienda-url:    "http://localhost:8501";
+      --whatsapp:      "573014397403";
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; width: 100%; }
+
+    /* ═══════════════════════════════════════════════════════════
+       ANIMACIONES
+    ═══════════════════════════════════════════════════════════ */
+    @keyframes fadeUp   { from{opacity:0;transform:translateY(32px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn   { from{opacity:0} to{opacity:1} }
+    @keyframes lineGrow { from{width:0} to{width:72px} }
+    @keyframes floatY   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+    @keyframes pulse    { 0%,100%{opacity:.7} 50%{opacity:.2} }
+    @keyframes shimmer  { 0%{background-position:-600px 0} 100%{background-position:600px 0} }
+
+    .anim-fade-up  { animation: fadeUp  .85s cubic-bezier(.22,1,.36,1) both; }
+    .anim-fade-in  { animation: fadeIn  1.2s ease both; }
+    .delay-1 { animation-delay: .15s; }
+    .delay-2 { animation-delay: .30s; }
+    .delay-3 { animation-delay: .50s; }
+    .delay-4 { animation-delay: .70s; }
+
+    /* ═══════════════════════════════════════════════════════════
+       NAVBAR
+    ═══════════════════════════════════════════════════════════ */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 56px;
+      background: linear-gradient(180deg,rgba(8,8,8,.96) 0%,rgba(8,8,8,0) 100%);
+      transition: background .4s, padding .3s;
+    }
+    .navbar.scrolled {
+      background: rgba(8,8,8,.97);
+      padding: 14px 56px;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; color: var(--gold);
+      letter-spacing: .2em; font-weight: 600;
+      line-height: 1.1;
+    }
+    .nav-brand span {
+      display: block; font-family: 'Montserrat', sans-serif;
+      font-size: .58rem; color: var(--text-muted);
+      letter-spacing: .38em; text-transform: uppercase;
+      font-weight: 400; margin-top: 2px;
+    }
+    .nav-links { display: flex; gap: 36px; }
+    .nav-links a {
+      font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(245,240,232,.65); transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      font-size: .7rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold); border: 1px solid rgba(212,175,55,.4);
+      padding: 9px 22px; transition: background .2s, border-color .2s;
+    }
+    .nav-cta:hover { background: rgba(212,175,55,.1); border-color: var(--gold); }
+
+    /* ═══════════════════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════════════════ */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 24px 80px; overflow: hidden;
+      background:
+        radial-gradient(ellipse 70% 60% at 15% 55%, rgba(212,175,55,.07) 0%, transparent 100%),
+        radial-gradient(ellipse 50% 50% at 85% 25%, rgba(212,175,55,.04) 0%, transparent 100%),
+        linear-gradient(175deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg) 100%);
+    }
+    /* Imagen de fondo sutil */
+    .hero-bg-img {
+      position: absolute; right: 4%; top: 50%; transform: translateY(-50%);
+      width: 38%; opacity: .09;
+      animation: floatY 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .hero-bg-img img {
+      border-radius: 50%;
+      filter: sepia(.4) brightness(.9);
+    }
+    /* Partículas */
+    .particle {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle, var(--gold), transparent);
+      animation: pulse 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .hero-inner { position: relative; z-index: 2; max-width: 760px; }
+    .hero-eyebrow {
+      font-size: .68rem; letter-spacing: .5em; color: var(--text-muted);
+      text-transform: uppercase; margin-bottom: 26px;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.4rem, 8vw, 7rem);
+      color: var(--text); line-height: 1.08; font-weight: 300;
+    }
+    .hero-title em { color: var(--gold); font-style: italic; }
+    .hero-divider {
+      height: 1px; width: 0; margin: 28px auto;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      animation: lineGrow 1.1s cubic-bezier(.22,1,.36,1) .6s forwards;
+    }
+    .hero-subtitle {
+      font-size: .8rem; letter-spacing: .28em; color: var(--text-muted);
+      text-transform: uppercase; margin-bottom: 48px;
+    }
+    .hero-buttons { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-block; padding: 16px 48px;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-dark));
+      color: #080808; font-size: .72rem; font-weight: 700;
+      letter-spacing: .22em; text-transform: uppercase;
+      border: none; cursor: pointer;
+      transition: opacity .25s, transform .2s, box-shadow .25s;
+      box-shadow: 0 4px 24px rgba(212,175,55,.2);
+    }
+    .btn-primary:hover {
+      opacity: .88; transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(212,175,55,.35);
+    }
+    .btn-secondary {
+      display: inline-block; padding: 15px 42px;
+      border: 1px solid rgba(212,175,55,.4); color: rgba(245,240,232,.75);
+      font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--gold); color: var(--gold);
+      background: rgba(212,175,55,.06);
+    }
+
+    .scroll-hint {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      animation: floatY 2.8s ease-in-out infinite;
+    }
+    .scroll-hint span {
+      font-size: .6rem; letter-spacing: .35em; color: #444; text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px; height: 42px;
+      background: linear-gradient(180deg, var(--gold), transparent);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       FEATURES BAR
+    ═══════════════════════════════════════════════════════════ */
+    .features {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      background: #0b0b0b;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .feat {
+      padding: 32px 22px; text-align: center;
+      border-right: 1px solid var(--border);
+      transition: background .25s;
+    }
+    .feat:last-child { border-right: none; }
+    .feat:hover { background: rgba(212,175,55,.04); }
+    .feat-icon { font-size: 1.6rem; margin-bottom: 10px; }
+    .feat-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .95rem; color: var(--gold); margin-bottom: 5px;
+    }
+    .feat-desc { font-size: .72rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ═══════════════════════════════════════════════════════════
+       SECCIÓN GENÉRICA
+    ═══════════════════════════════════════════════════════════ */
+    .section { padding: 88px 56px; }
+    .section-eyebrow {
+      font-size: .66rem; letter-spacing: .48em; color: var(--text-muted);
+      text-transform: uppercase; text-align: center; margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.9rem, 3.5vw, 3rem);
+      color: var(--text); text-align: center; font-weight: 300; margin-bottom: 0;
+    }
+    .section-line {
+      width: 60px; height: 1px; margin: 18px auto 56px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       COLECCIONES GRID
+    ═══════════════════════════════════════════════════════════ */
+    .col-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      grid-template-rows: 300px 300px;
+      gap: 4px;
+    }
+    .col-item {
+      position: relative; overflow: hidden; cursor: pointer;
+      background: #111;
+    }
+    .col-item.span-2 { grid-row: span 2; }
+    .col-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .65s cubic-bezier(.25,.46,.45,.94), filter .4s;
+      filter: brightness(.6);
+    }
+    .col-item:hover img { transform: scale(1.09); filter: brightness(.42); }
+    .col-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 28px 24px;
+      background: linear-gradient(0deg, rgba(0,0,0,.88) 0%, transparent 100%);
+      transition: padding .3s;
+    }
+    .col-item:hover .col-overlay { padding-bottom: 32px; }
+    .col-cat {
+      font-size: .62rem; letter-spacing: .32em; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 5px;
+    }
+    .col-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; color: var(--text); font-weight: 300;
+    }
+    .col-arrow {
+      display: inline-block; margin-top: 8px;
+      font-size: .66rem; letter-spacing: .18em; color: rgba(245,240,232,.5);
+      text-transform: uppercase; border-bottom: 1px solid rgba(212,175,55,.35);
+      transition: color .2s, border-color .2s;
+    }
+    .col-item:hover .col-arrow { color: var(--gold); border-color: var(--gold); }
+
+    /* ═══════════════════════════════════════════════════════════
+       QUIÉNES SOMOS
+    ═══════════════════════════════════════════════════════════ */
+    .about { display: grid; grid-template-columns: 1fr 1fr; background: #0d0d0d; }
+    .about-img { overflow: hidden; min-height: 520px; }
+    .about-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .7s cubic-bezier(.25,.46,.45,.94);
+      filter: brightness(.85);
+    }
+    .about:hover .about-img img { transform: scale(1.04); }
+    .about-text {
+      background: #111; padding: 80px 60px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .about-eyebrow {
+      font-size: .66rem; letter-spacing: .45em; color: var(--text-muted);
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .about-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3vw, 2.8rem); color: var(--text);
+      font-weight: 300; line-height: 1.2; margin-bottom: 20px;
+    }
+    .about-title em { color: var(--gold); }
+    .about-line { width: 48px; height: 1px; background: var(--gold); margin-bottom: 26px; }
+    .about-p { font-size: .84rem; color: var(--text-muted); line-height: 1.95; margin-bottom: 14px; }
+    .about-p strong { color: #C8BFA8; }
+    .stats { display: flex; gap: 32px; margin-top: 40px; }
+    .stat-n {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.1rem; color: var(--gold); font-weight: 600; line-height: 1;
+    }
+    .stat-l { font-size: .68rem; color: var(--text-muted); margin-top: 5px; letter-spacing: .08em; }
+
+    /* ═══════════════════════════════════════════════════════════
+       BANNER CTA
+    ═══════════════════════════════════════════════════════════ */
+    .cta-banner {
+      margin: 0; padding: 80px 56px; text-align: center;
+      background:
+        linear-gradient(135deg, #0c0a03 0%, #1a1508 50%, #0c0a03 100%);
+      border-top: 1px solid rgba(212,175,55,.12);
+      border-bottom: 1px solid rgba(212,175,55,.12);
+    }
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--gold);
+      font-weight: 300; margin-bottom: 14px;
+    }
+    .cta-sub { font-size: .82rem; color: var(--text-muted); line-height: 1.9; margin-bottom: 32px; }
+    .badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .badge {
+      background: rgba(212,175,55,.1); border: 1px solid rgba(212,175,55,.28);
+      border-radius: 20px; padding: 5px 18px;
+      font-size: .72rem; color: var(--gold); letter-spacing: .06em;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════════════ */
+    .footer {
+      background: #050505; border-top: 1px solid var(--border);
+      padding: 64px 56px 32px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1.6fr;
+      gap: 52px; margin-bottom: 52px;
+    }
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; color: var(--gold); letter-spacing: .12em; margin-bottom: 12px;
+    }
+    .footer-desc { font-size: .77rem; color: #5a5a5a; line-height: 1.9; }
+    .social-row { display: flex; gap: 12px; margin-top: 20px; }
+    .social-btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid #222; display: flex; align-items: center;
+      justify-content: center; font-size: .85rem; color: #555;
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .social-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,.06); }
+    .footer-ttl {
+      font-size: .68rem; letter-spacing: .28em; color: var(--text-muted);
+      text-transform: uppercase; margin-bottom: 18px; font-weight: 600;
+    }
+    .footer-link {
+      display: block; font-size: .77rem; color: #5a5a5a; margin-bottom: 10px;
+      transition: color .2s;
+    }
+    .footer-link:hover { color: var(--gold); }
+    .footer-contact { font-size: .77rem; color: #5a5a5a; line-height: 2.1; }
+    .footer-contact strong { color: var(--text-muted); }
+    .footer-contact a { transition: color .2s; }
+    .footer-contact a.wa  { color: #25D366; }
+    .footer-contact a.mail { color: var(--gold); }
+    .footer-divider { height: 1px; background: var(--border); margin-bottom: 24px; }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .68rem; color: #3a3a3a; flex-wrap: wrap; gap: 8px;
+    }
+    .footer-bottom a { color: #4a4a4a; transition: color .2s; }
+    .footer-bottom a:hover { color: var(--gold); }
+
+    /* ═══════════════════════════════════════════════════════════
+       WhatsApp FAB
+    ═══════════════════════════════════════════════════════════ */
+    .wa-fab {
+      position: fixed; bottom: 28px; right: 28px; z-index: 9999;
+      width: 54px; height: 54px; border-radius: 50%;
+      background: #25D366; display: flex; align-items: center;
+      justify-content: center; font-size: 1.5rem;
+      box-shadow: 0 4px 20px rgba(37,211,102,.45);
+      animation: floatY 3s ease-in-out infinite;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .wa-fab:hover {
+      transform: scale(1.12);
+      box-shadow: 0 6px 30px rgba(37,211,102,.65);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .navbar { padding: 16px 24px; }
+      .navbar.scrolled { padding: 12px 24px; }
+      .nav-links { display: none; }
+      .features { grid-template-columns: 1fr 1fr; }
+      .feat:nth-child(2) { border-right: none; }
+      .col-grid { grid-template-columns: 1fr; grid-template-rows: repeat(5, 240px); }
+      .col-item.span-2 { grid-row: span 1; }
+      .about { grid-template-columns: 1fr; }
+      .about-img { min-height: 320px; }
+      .about-text { padding: 48px 32px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .section { padding: 56px 24px; }
+      .cta-banner { padding: 56px 24px; }
+      .footer { padding: 48px 24px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════ NAVBAR ═══════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-brand">
+      MATALLANA
+      <span>Joyería VIP · Colombia</span>
+    </div>
+    <div class="nav-links">
+      <a href="#colecciones">Colecciones</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <a class="nav-cta" href="http://localhost:8501" target="_blank">Entrar a la Tienda</a>
+  </nav>
+
+  <!-- ═══════════════ HERO ═══════════════ -->
+  <section class="hero">
+
+    <!-- Imagen de fondo sutil -->
+    <div class="hero-bg-img">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Starlight_-_white_gold_ring_with_diamonds.jpg/960px-Starlight_-_white_gold_ring_with_diamonds.jpg" alt="">
+    </div>
+
+    <!-- Partículas -->
+    <div class="particle" style="width:5px;height:5px;top:14%;left:8%;opacity:.6;animation-delay:0s"></div>
+    <div class="particle" style="width:3px;height:3px;top:27%;left:84%;opacity:.4;animation-delay:.9s"></div>
+    <div class="particle" style="width:4px;height:4px;top:70%;left:6%;opacity:.5;animation-delay:1.6s"></div>
+    <div class="particle" style="width:3px;height:3px;top:58%;left:92%;opacity:.6;animation-delay:.4s"></div>
+    <div class="particle" style="width:5px;height:5px;top:83%;left:47%;opacity:.3;animation-delay:2.1s"></div>
+    <div class="particle" style="width:2px;height:2px;top:42%;left:22%;opacity:.5;animation-delay:1s"></div>
+    <div class="particle" style="width:4px;height:4px;top:20%;left:64%;opacity:.4;animation-delay:.6s"></div>
+
+    <div class="hero-inner">
+      <div class="hero-eyebrow anim-fade-up">✦ &nbsp; Bogotá, Colombia · Desde 1998 &nbsp; ✦</div>
+
+      <h1 class="hero-title anim-fade-up delay-1">
+        Joyería<br>
+        <em>Atemporal</em><br>
+        &amp; Exclusiva
+      </h1>
+
+      <div class="hero-divider"></div>
+
+      <p class="hero-subtitle anim-fade-up delay-2">
+        Esmeraldas de Boyacá &nbsp;·&nbsp; Oro 18K &nbsp;·&nbsp; Piezas a Medida
+      </p>
+
+      <div class="hero-buttons anim-fade-up delay-3">
+        <a class="btn-primary" href="http://localhost:8501" target="_blank">
+          Ver Colección
+        </a>
+        <a class="btn-secondary" href="http://localhost:8501/A%20Medida" target="_blank">
+          Diseña tu Joya
+        </a>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════ FEATURES BAR ═══════════════ -->
+  <div class="features">
+    <div class="feat">
+      <div class="feat-icon">💎</div>
+      <div class="feat-title">Materiales Certificados</div>
+      <div class="feat-desc">Oro 18K, Plata 925 y Platino<br>con certificado de autenticidad</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">🌿</div>
+      <div class="feat-title">Esmeraldas Colombianas</div>
+      <div class="feat-desc">Muzo y Chivor, Boyacá<br>Las más finas del mundo</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">✦</div>
+      <div class="feat-title">Diseño a Medida</div>
+      <div class="feat-desc">Tu pieza, tu historia<br>Configurada desde cero</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">🛡️</div>
+      <div class="feat-title">Garantía Total</div>
+      <div class="feat-desc">+25 años de tradición<br>Garantía en cada pieza</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">📦</div>
+      <div class="feat-title">Envío Seguro</div>
+      <div class="feat-desc">Envío asegurado<br>a toda Colombia</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ COLECCIONES ═══════════════ -->
+  <section class="section" id="colecciones">
+    <div class="section-eyebrow">Descubre</div>
+    <h2 class="section-title">Nuestras Colecciones</h2>
+    <div class="section-line"></div>
+
+    <div class="col-grid">
+      <div class="col-item span-2">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Starlight_-_white_gold_ring_with_diamonds.jpg/960px-Starlight_-_white_gold_ring_with_diamonds.jpg" alt="Anillos" loading="lazy">
+        <div class="col-overlay">
+          <div class="col-cat">Colección Exclusiva</div>
+          <div class="col-name">Anillos</div>
+          <a class="col-arrow" href="http://localhost:8501" target="_blank">Explorar →</a>
+        </div>
+      </div>
+      <div class="col-item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Gold_chain_in_three_strands_MET_DP257487.jpg/960px-Gold_chain_in_three_strands_MET_DP257487.jpg" alt="Cadenas" loading="lazy">
+        <div class="col-overlay">
+          <div class="col-cat">Colección</div>
+          <div class="col-name">Cadenas</div>
+          <a class="col-arrow" href="http://localhost:8501" target="_blank">Explorar →</a>
+        </div>
+      </div>
+      <div class="col-item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Gold_bracelet_MET_DT333008.jpg/960px-Gold_bracelet_MET_DT333008.jpg" alt="Manillas" loading="lazy">
+        <div class="col-overlay">
+          <div class="col-cat">Colección</div>
+          <div class="col-name">Manillas</div>
+          <a class="col-arrow" href="http://localhost:8501" target="_blank">Explorar →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ QUIÉNES SOMOS ═══════════════ -->
+  <div class="about" id="nosotros">
+    <div class="about-img">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Gold_necklace_with_crescent-shaped_pendant_MET_DP160653.jpg/960px-Gold_necklace_with_crescent-shaped_pendant_MET_DP160653.jpg" alt="Joyería Matallana VIP" loading="lazy">
+    </div>
+    <div class="about-text">
+      <div class="about-eyebrow">Nuestra Historia</div>
+      <h2 class="about-title">
+        Arte &amp; Tradición<br>
+        <em>desde 1998</em>
+      </h2>
+      <div class="about-line"></div>
+      <p class="about-p">
+        Joyería Matallana VIP nació en Bogotá como un taller artesanal familiar
+        con una convicción: <strong>cada joya debe contar una historia.</strong>
+      </p>
+      <p class="about-p">
+        Somos referentes en joyería de alta gama en Colombia, especializados en
+        piezas con esmeraldas de Boyacá, diamantes y metales certificados.
+        Cada pieza lleva garantía de autenticidad de por vida.
+      </p>
+      <div class="stats">
+        <div>
+          <div class="stat-n">+25</div>
+          <div class="stat-l">Años</div>
+        </div>
+        <div>
+          <div class="stat-n">+8K</div>
+          <div class="stat-l">Piezas creadas</div>
+        </div>
+        <div>
+          <div class="stat-n">100%</div>
+          <div class="stat-l">Certificado</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ BANNER CTA ═══════════════ -->
+  <div class="cta-banner">
+    <div class="cta-title">¿Lista tu joya a medida?</div>
+    <p class="cta-sub">
+      Usa nuestro configurador y recibe tu presupuesto en tiempo real.<br>
+      Esmeraldas desde <strong style="color:#C8BFA8;">$ 420.000 COP/ct</strong> &nbsp;·&nbsp;
+      Oro 18K desde <strong style="color:#C8BFA8;">$ 189.000 COP/g</strong>
+    </p>
+    <div class="badges">
+      <span class="badge">✦ Esmeraldas Colombianas</span>
+      <span class="badge">✦ Grabado Personalizado</span>
+      <span class="badge">✦ Envío a toda Colombia</span>
+      <span class="badge">✦ Garantía de por vida</span>
+    </div>
+    <br>
+    <a class="btn-primary" href="http://localhost:8501/A%20Medida" target="_blank"
+       style="margin-top:12px; display:inline-block;">
+      Configurar mi Joya
+    </a>
+  </div>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="footer" id="contacto">
+    <div class="footer-grid">
+
+      <div>
+        <div class="footer-brand">MATALLANA VIP</div>
+        <p class="footer-desc">
+          Joyería de alta gama en Colombia.<br>
+          Esmeraldas, diamantes y metales preciosos certificados.<br>
+          Más de 25 años creando piezas únicas con alma.
+        </p>
+        <div class="social-row">
+          <a class="social-btn" href="https://wa.me/573014397403" target="_blank" title="WhatsApp">💬</a>
+          <a class="social-btn" href="#" title="Instagram">📸</a>
+          <a class="social-btn" href="#" title="Facebook">👥</a>
+          <a class="social-btn" href="#" title="TikTok">🎵</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-ttl">Horarios</div>
+        <div class="footer-contact">
+          <strong>📍 Sede Principal</strong><br>
+          Lun – Vie: 9:00 am – 6:00 pm<br>
+          Sábado: 10:00 am – 5:00 pm<br>
+          Domingo: Cerrado<br><br>
+          <strong>🌐 Tienda Online</strong><br>
+          24 horas · 7 días
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-ttl">Explorar</div>
+        <a class="footer-link" href="http://localhost:8501" target="_blank">Catálogo</a>
+        <a class="footer-link" href="http://localhost:8501" target="_blank">Anillos</a>
+        <a class="footer-link" href="http://localhost:8501" target="_blank">Cadenas &amp; Manillas</a>
+        <a class="footer-link" href="http://localhost:8501/A%20Medida" target="_blank">Joyería a Medida</a>
+        <a class="footer-link" href="#nosotros">Quiénes Somos</a>
+      </div>
+
+      <div>
+        <div class="footer-ttl">Contacto</div>
+        <div class="footer-contact">
+          <strong>📍 Bogotá D.C., Colombia</strong><br><br>
+          <strong>📞 WhatsApp</strong><br>
+          <a class="wa" href="https://wa.me/573014397403" target="_blank">+57 301 439 7403</a><br><br>
+          <strong>✉️ Correo</strong><br>
+          <a class="mail" href="mailto:admin@matallanavip.com">admin@matallanavip.com</a><br><br>
+          <span style="font-size:.68rem;color:#333;">NIT 900.XXX.XXX-X</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <span>© 2026 Joyería Matallana VIP · Bogotá, Colombia · Todos los derechos reservados</span>
+      <span>
+        <a href="#">Política de Privacidad</a> &nbsp;·&nbsp;
+        <a href="#">Habeas Data — Ley 1581/2012</a> &nbsp;·&nbsp;
+        <a href="#">Términos y Condiciones</a>
+      </span>
+    </div>
+  </footer>
+
+  <!-- WhatsApp FAB -->
+  <a class="wa-fab" href="https://wa.me/573014397403" target="_blank" title="Escríbenos por WhatsApp">💬</a>
+
+  <!-- ═══════════════ SCRIPTS ═══════════════ -->
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Intersection Observer — animar elementos al hacer scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.feat, .col-item, .about-text, .stat-n').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity .7s ease, transform .7s ease';
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>
